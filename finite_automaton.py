@@ -19,6 +19,27 @@ class FiniteAutomaton:
                 return False
         return True
 
+    def string_belongs_to_language(self, word):
+        """
+        Simulates the automaton (works for NDFA).
+        Returns True if the word is accepted.
+        """
+        current_states = {self.start_state}
+
+        for symbol in word:
+            next_states = set()
+
+            for state in current_states:
+                if (state, symbol) in self.transitions:
+                    next_states.update(self.transitions[(state, symbol)])
+
+            current_states = next_states
+
+            if not current_states:
+                return False
+
+        return any(state in self.final_states for state in current_states)
+
     def to_regular_grammar(self):
         """
         Converts FA to right-linear grammar.
@@ -46,7 +67,6 @@ class FiniteAutomaton:
         Subset construction algorithm.
         Converts NDFA to DFA.
         """
-
         dfa_states = []
         dfa_transitions = {}
         dfa_final_states = []

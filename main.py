@@ -25,6 +25,17 @@ def main():
     print("Is Deterministic?")
     print(fa.is_deterministic())
 
+    # ------------------ STRING TESTING ------------------
+
+    print("\nSTRING TESTING\n")
+
+    test_words = ["bc", "abc", "bbbc", "ac"]
+
+    for word in test_words:
+        result = fa.string_belongs_to_language(word)
+        print(f"Test word '{word}': {result}")
+
+
     print("\nCONVERSION TO REGULAR GRAMMAR\n")
 
     grammar = fa.to_regular_grammar()

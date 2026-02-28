@@ -225,6 +225,11 @@ Program Output:
   <img src="scr/iout.png" alt="Output results" width="40%">
   <p>Figure 1 - Output results</p>
 </div> 
+<div align="center">
+  <img src="scr/im.png" alt="Output results" width="40%">
+ <p>Figure 2 - Output results string testing</p>
+</div> 
+ 
 
 **Difficulties During Implementation**
 
