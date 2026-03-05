@@ -1,0 +1,462 @@
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># LFAF
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision f28b01e81860d542b7f3d95dc36a0d48df2acaa1)
++++ b/README.md	(date 1772140977662)
+@@ -1,1 +1,236 @@
+-# LFAF
+\ No newline at end of file
++Laboratory Work 2
++
++Course: Formal Languages & Finite Automata
++Author: Cuibari Vladislav FAF-243
++
++Theory
++
++A finite automaton is a mathematical model used to recognize formal languages. It consists of a finite set of states, an alphabet, a transition function, a start state, and a set of final (accepting) states. When an input string is processed symbol by symbol, the automaton moves between states according to the transition function. If the automaton ends in a final state after consuming the entire string, the string is accepted.
++
++Finite automata can be deterministic (DFA) or non-deterministic (NDFA). In a DFA, each state and input symbol pair leads to exactly one next state. In an NDFA, a state and symbol may lead to multiple possible next states. Although NDFA and DFA differ structurally, they are equivalent in expressive power. Any NDFA can be converted into an equivalent DFA using the subset construction algorithm.
++
++Regular grammars (Type 3 in the Chomsky hierarchy) are equivalent to finite automata. A finite automaton can be converted into a right-linear grammar by transforming transitions into production rules.
++
++Objectives
++
++Understand the structure and behavior of a finite automaton.
++
++Classify a grammar according to the Chomsky hierarchy.
++
++Convert a finite automaton into a regular grammar.
++
++Determine whether the given finite automaton is deterministic or non-deterministic.
++
++Implement the subset construction algorithm to convert an NDFA into a DFA.
++
++Structure the implementation using multiple Python files and OOP principles.
++
++Variant 10 – Finite Automaton Definition
++
++Q = {q0, q1, q2, q3}
++Σ = {a, b, c}
++F = {q3}
++
++Transitions:
++
++δ(q0,a) = q1
++δ(q0,b) = q2
++δ(q1,b) = q2
++δ(q1,b) = q1
++δ(q2,c) = q3
++δ(q3,a) = q1
++
++Because δ(q1,b) leads to two states (q1 and q2), the automaton is non-deterministic.
++
++Implementation Description
++
++The project is structured into three Python files:
++
++finite_automaton.py
++grammar.py
++main.py
++1. FiniteAutomaton Class
++
++This class models the finite automaton. It stores:
++
++states
++
++alphabet
++
++transition function
++
++start state
++
++final states
++
++It implements three main methods:
++
++is_deterministic()
++
++Checks whether any transition leads to more than one state.
++
++def is_deterministic(self):
++    for (state, symbol), next_states in self.transitions.items():
++        if len(next_states) > 1:
++            return False
++    return True
++
++If any transition has multiple next states, the automaton is NDFA.
++
++to_regular_grammar()
++
++Converts the automaton into a right-linear grammar.
++
++For each transition:
++δ(qi, a) = qj
++
++We add:
++qi → a qj
++
++If a state is final, we add:
++qf → ε
++
++def to_regular_grammar(self):
++    from grammar import Grammar
++    productions = defaultdict(list)
++
++    for (state, symbol), next_states in self.transitions.items():
++        for next_state in next_states:
++            productions[state].append(symbol + next_state)
++
++    for final_state in self.final_states:
++        productions[final_state].append("ε")
++
++    return Grammar(
++        non_terminals=self.states,
++        terminals=self.alphabet,
++        productions=productions,
++        start_symbol=self.start_state
++    )
++to_dfa()
++
++Implements subset construction.
++
++Each DFA state represents a set of NDFA states using frozenset.
++
++def to_dfa(self):
++    start = frozenset([self.start_state])
++    unprocessed = [start]
++    dfa_states = [start]
++    dfa_transitions = {}
++    dfa_final_states = []
++
++    while unprocessed:
++        current = unprocessed.pop()
++
++        for symbol in self.alphabet:
++            next_set = set()
++
++            for state in current:
++                if (state, symbol) in self.transitions:
++                    next_set.update(self.transitions[(state, symbol)])
++
++            next_frozen = frozenset(next_set)
++            dfa_transitions[(current, symbol)] = next_frozen
++
++            if next_frozen not in dfa_states:
++                dfa_states.append(next_frozen)
++                unprocessed.append(next_frozen)
++
++    for state_set in dfa_states:
++        if any(state in self.final_states for state in state_set):
++            dfa_final_states.append(state_set)
++
++    return dfa_states, dfa_transitions, start, dfa_final_states
++2. Grammar Class
++
++This class models a formal grammar and classifies it according to the Chomsky hierarchy.
++
++classify()
++
++Checks whether productions respect regular grammar rules:
++
++A → aB
++
++A → a
++
++A → ε
++
++def classify(self):
++    is_regular = True
++    is_context_free = True
++
++    for left, rights in self.productions.items():
++        if left not in self.non_terminals:
++            is_context_free = False
++            is_regular = False
++
++        for right in rights:
++            if right == "ε":
++                continue
++
++            if len(right) == 2:
++                if not (right[0] in self.terminals and right[1:] in self.non_terminals):
++                    is_regular = False
++            elif len(right) == 1:
++                if right not in self.terminals:
++                    is_regular = False
++            else:
++                is_regular = False
++
++    if is_regular:
++        return "Type 3 - Regular Grammar"
++    elif is_context_free:
++        return "Type 2 - Context-Free Grammar"
++    else:
++        return "Type 0/1 - More General Grammar"
++
++For our variant, the grammar is classified as:
++
++Type 3 – Regular Grammar
++
++3. Main File
++
++The main file instantiates the automaton using Variant 10 and executes all required functionality.
++
++def main():
++
++    states = {"q0", "q1", "q2", "q3"}
++    alphabet = {"a", "b", "c"}
++
++    transitions = {
++        ("q0", "a"): {"q1"},
++        ("q0", "b"): {"q2"},
++        ("q1", "b"): {"q1", "q2"},
++        ("q2", "c"): {"q3"},
++        ("q3", "a"): {"q1"},
++    }
++
++    start_state = "q0"
++    final_states = {"q3"}
++
++    fa = FiniteAutomaton(states, alphabet, transitions, start_state, final_states)
++
++    print("Is Deterministic?", fa.is_deterministic())
++
++    grammar = fa.to_regular_grammar()
++    grammar.print_productions()
++    print("Grammar Classification:", grammar.classify())
++
++    dfa_states, dfa_transitions, dfa_start, dfa_finals = fa.to_dfa()
++Results
++
++Program Output:
++
++<div align="center">
++  <img src="rsc/resources.png" alt="Output results" width="40%">
++  <p>Figure 1 - Output results</p>
++</div>
++
++Conclusions
++
++This laboratory work extended the previous implementation by focusing on finite automata analysis and transformation. The given automaton was identified as non-deterministic due to multiple transitions for the same state and symbol. The automaton was successfully converted into an equivalent regular grammar, confirming the theoretical equivalence between finite automata and regular grammars.
++
++The subset construction algorithm was implemented to transform the NDFA into an equivalent DFA. The implementation follows object-oriented principles and separates responsibilities into distinct classes, improving clarity and modularity.
++
++The results demonstrate both the theoretical concepts and their practical application in Python.
+\ No newline at end of file
+Index: grammar.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/grammar.py b/grammar.py
+new file mode 100644
+--- /dev/null	(date 1772140977667)
++++ b/grammar.py	(date 1772140977667)
+@@ -0,0 +1,50 @@
++class Grammar:
++    def __init__(self, non_terminals, terminals, productions, start_symbol):
++        self.non_terminals = non_terminals
++        self.terminals = terminals
++        self.productions = productions
++        self.start_symbol = start_symbol
++
++    def classify(self):
++        """
++        Classifies grammar according to Chomsky hierarchy.
++        """
++
++        is_regular = True
++        is_context_free = True
++
++        for left, rights in self.productions.items():
++
++            # Context-Free condition:
++            # left side must be single non-terminal
++            if len(left) != 2 and left not in self.non_terminals:
++                is_context_free = False
++                is_regular = False
++
++            for right in rights:
++
++                if right == "ε":
++                    continue
++
++                # Regular grammar check (right-linear)
++                if len(right) == 2:
++                    if not (right[0] in self.terminals and right[1:] in self.non_terminals):
++                        is_regular = False
++
++                elif len(right) == 1:
++                    if right not in self.terminals:
++                        is_regular = False
++
++                else:
++                    is_regular = False
++
++        if is_regular:
++            return "Type 3 - Regular Grammar"
++        elif is_context_free:
++            return "Type 2 - Context-Free Grammar"
++        else:
++            return "Type 0/1 - More General Grammar"
++
++    def print_productions(self):
++        for left, rights in self.productions.items():
++            print(left, "→", " | ".join(rights))
+\ No newline at end of file
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+new file mode 100644
+--- /dev/null	(date 1772140977692)
++++ b/main.py	(date 1772140977692)
+@@ -0,0 +1,50 @@
++from finite_automaton import FiniteAutomaton
++
++
++def main():
++
++    # Variant 10 definition
++    states = {"q0", "q1", "q2", "q3"}
++    alphabet = {"a", "b", "c"}
++
++    transitions = {
++        ("q0", "a"): {"q1"},
++        ("q0", "b"): {"q2"},
++        ("q1", "b"): {"q1", "q2"},  # nondeterminism
++        ("q2", "c"): {"q3"},
++        ("q3", "a"): {"q1"},
++    }
++
++    start_state = "q0"
++    final_states = {"q3"}
++
++    fa = FiniteAutomaton(states, alphabet, transitions, start_state, final_states)
++
++    print("----- FINITE AUTOMATON ANALYSIS -----\n")
++
++    print("Is Deterministic?")
++    print(fa.is_deterministic())
++
++    print("\n----- CONVERSION TO REGULAR GRAMMAR -----\n")
++
++    grammar = fa.to_regular_grammar()
++    grammar.print_productions()
++
++    print("\nGrammar Classification:")
++    print(grammar.classify())
++
++    print("\n----- NDFA → DFA CONVERSION -----\n")
++
++    dfa_states, dfa_transitions, dfa_start, dfa_finals = fa.to_dfa()
++
++    print("DFA States:")
++    for state in dfa_states:
++        print(state)
++
++    print("\nDFA Final States:")
++    for state in dfa_finals:
++        print(state)
++
++
++if __name__ == "__main__":
++    main()
+\ No newline at end of file
+Index: finite_automaton.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/finite_automaton.py b/finite_automaton.py
+new file mode 100644
+--- /dev/null	(date 1772140977705)
++++ b/finite_automaton.py	(date 1772140977705)
+@@ -0,0 +1,79 @@
++from collections import defaultdict
++
++
++class FiniteAutomaton:
++    def __init__(self, states, alphabet, transitions, start_state, final_states):
++        self.states = states
++        self.alphabet = alphabet
++        self.transitions = transitions  # (state, symbol) -> set(states)
++        self.start_state = start_state
++        self.final_states = final_states
++
++    def is_deterministic(self):
++        """
++        A FA is deterministic if every (state, symbol)
++        leads to at most one next state.
++        """
++        for (state, symbol), next_states in self.transitions.items():
++            if len(next_states) > 1:
++                return False
++        return True
++
++    def to_regular_grammar(self):
++        """
++        Converts FA to right-linear grammar.
++        """
++        from grammar import Grammar
++
++        productions = defaultdict(list)
++
++        for (state, symbol), next_states in self.transitions.items():
++            for next_state in next_states:
++                productions[state].append(symbol + next_state)
++
++        for final_state in self.final_states:
++            productions[final_state].append("ε")
++
++        return Grammar(
++            non_terminals=self.states,
++            terminals=self.alphabet,
++            productions=productions,
++            start_symbol=self.start_state
++        )
++
++    def to_dfa(self):
++        """
++        Subset construction algorithm.
++        Converts NDFA to DFA.
++        """
++
++        dfa_states = []
++        dfa_transitions = {}
++        dfa_final_states = []
++
++        start = frozenset([self.start_state])
++        unprocessed = [start]
++        dfa_states.append(start)
++
++        while unprocessed:
++            current = unprocessed.pop()
++
++            for symbol in self.alphabet:
++                next_set = set()
++
++                for state in current:
++                    if (state, symbol) in self.transitions:
++                        next_set.update(self.transitions[(state, symbol)])
++
++                next_frozen = frozenset(next_set)
++                dfa_transitions[(current, symbol)] = next_frozen
++
++                if next_frozen not in dfa_states:
++                    dfa_states.append(next_frozen)
++                    unprocessed.append(next_frozen)
++
++        for state_set in dfa_states:
++            if any(state in self.final_states for state in state_set):
++                dfa_final_states.append(state_set)
++
++        return dfa_states, dfa_transitions, start, dfa_final_states
+\ No newline at end of file

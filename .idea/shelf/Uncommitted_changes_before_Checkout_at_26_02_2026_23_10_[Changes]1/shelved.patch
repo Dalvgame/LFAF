@@ -1,0 +1,212 @@
+Index: grammar.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/grammar.py b/grammar.py
+new file mode 100644
+--- /dev/null	(date 1772140220387)
++++ b/grammar.py	(date 1772140220387)
+@@ -0,0 +1,50 @@
++class Grammar:
++    def __init__(self, non_terminals, terminals, productions, start_symbol):
++        self.non_terminals = non_terminals
++        self.terminals = terminals
++        self.productions = productions
++        self.start_symbol = start_symbol
++
++    def classify(self):
++        """
++        Classifies grammar according to Chomsky hierarchy.
++        """
++
++        is_regular = True
++        is_context_free = True
++
++        for left, rights in self.productions.items():
++
++            # Context-Free condition:
++            # left side must be single non-terminal
++            if len(left) != 2 and left not in self.non_terminals:
++                is_context_free = False
++                is_regular = False
++
++            for right in rights:
++
++                if right == "ε":
++                    continue
++
++                # Regular grammar check (right-linear)
++                if len(right) == 2:
++                    if not (right[0] in self.terminals and right[1:] in self.non_terminals):
++                        is_regular = False
++
++                elif len(right) == 1:
++                    if right not in self.terminals:
++                        is_regular = False
++
++                else:
++                    is_regular = False
++
++        if is_regular:
++            return "Type 3 - Regular Grammar"
++        elif is_context_free:
++            return "Type 2 - Context-Free Grammar"
++        else:
++            return "Type 0/1 - More General Grammar"
++
++    def print_productions(self):
++        for left, rights in self.productions.items():
++            print(left, "→", " | ".join(rights))
+\ No newline at end of file
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+new file mode 100644
+--- /dev/null	(date 1772140220405)
++++ b/main.py	(date 1772140220405)
+@@ -0,0 +1,50 @@
++from finite_automaton import FiniteAutomaton
++
++
++def main():
++
++    # Variant 10 definition
++    states = {"q0", "q1", "q2", "q3"}
++    alphabet = {"a", "b", "c"}
++
++    transitions = {
++        ("q0", "a"): {"q1"},
++        ("q0", "b"): {"q2"},
++        ("q1", "b"): {"q1", "q2"},  # nondeterminism
++        ("q2", "c"): {"q3"},
++        ("q3", "a"): {"q1"},
++    }
++
++    start_state = "q0"
++    final_states = {"q3"}
++
++    fa = FiniteAutomaton(states, alphabet, transitions, start_state, final_states)
++
++    print("----- FINITE AUTOMATON ANALYSIS -----\n")
++
++    print("Is Deterministic?")
++    print(fa.is_deterministic())
++
++    print("\n----- CONVERSION TO REGULAR GRAMMAR -----\n")
++
++    grammar = fa.to_regular_grammar()
++    grammar.print_productions()
++
++    print("\nGrammar Classification:")
++    print(grammar.classify())
++
++    print("\n----- NDFA → DFA CONVERSION -----\n")
++
++    dfa_states, dfa_transitions, dfa_start, dfa_finals = fa.to_dfa()
++
++    print("DFA States:")
++    for state in dfa_states:
++        print(state)
++
++    print("\nDFA Final States:")
++    for state in dfa_finals:
++        print(state)
++
++
++if __name__ == "__main__":
++    main()
+\ No newline at end of file
+Index: finite_automaton.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/finite_automaton.py b/finite_automaton.py
+new file mode 100644
+--- /dev/null	(date 1772140220426)
++++ b/finite_automaton.py	(date 1772140220426)
+@@ -0,0 +1,79 @@
++from collections import defaultdict
++
++
++class FiniteAutomaton:
++    def __init__(self, states, alphabet, transitions, start_state, final_states):
++        self.states = states
++        self.alphabet = alphabet
++        self.transitions = transitions  # (state, symbol) -> set(states)
++        self.start_state = start_state
++        self.final_states = final_states
++
++    def is_deterministic(self):
++        """
++        A FA is deterministic if every (state, symbol)
++        leads to at most one next state.
++        """
++        for (state, symbol), next_states in self.transitions.items():
++            if len(next_states) > 1:
++                return False
++        return True
++
++    def to_regular_grammar(self):
++        """
++        Converts FA to right-linear grammar.
++        """
++        from grammar import Grammar
++
++        productions = defaultdict(list)
++
++        for (state, symbol), next_states in self.transitions.items():
++            for next_state in next_states:
++                productions[state].append(symbol + next_state)
++
++        for final_state in self.final_states:
++            productions[final_state].append("ε")
++
++        return Grammar(
++            non_terminals=self.states,
++            terminals=self.alphabet,
++            productions=productions,
++            start_symbol=self.start_state
++        )
++
++    def to_dfa(self):
++        """
++        Subset construction algorithm.
++        Converts NDFA to DFA.
++        """
++
++        dfa_states = []
++        dfa_transitions = {}
++        dfa_final_states = []
++
++        start = frozenset([self.start_state])
++        unprocessed = [start]
++        dfa_states.append(start)
++
++        while unprocessed:
++            current = unprocessed.pop()
++
++            for symbol in self.alphabet:
++                next_set = set()
++
++                for state in current:
++                    if (state, symbol) in self.transitions:
++                        next_set.update(self.transitions[(state, symbol)])
++
++                next_frozen = frozenset(next_set)
++                dfa_transitions[(current, symbol)] = next_frozen
++
++                if next_frozen not in dfa_states:
++                    dfa_states.append(next_frozen)
++                    unprocessed.append(next_frozen)
++
++        for state_set in dfa_states:
++            if any(state in self.final_states for state in state_set):
++                dfa_final_states.append(state_set)
++
++        return dfa_states, dfa_transitions, start, dfa_final_states
+\ No newline at end of file
