@@ -218,12 +218,18 @@ def main():
     print("Grammar Classification:", grammar.classify())
 
     dfa_states, dfa_transitions, dfa_start, dfa_finals = fa.to_dfa()
-Results
+Results Visual representation.
+
+  <img src="scr/image.png" alt="Output results" width="40%">
 
 Program Output:
 <div align="center">
-  <img src="scr/iout.png" alt="Output results" width="40%">
-  <p>Figure 1 - Output results</p>
+  <img src="scr/ioo.png" alt="Output results" width="40%">
+  <p>Figure 1 - Output results part 1</p>
+</div> 
+<div align="center">
+  <img src="scr/iooo.png" alt="Output results" width="40%">
+  <p>Figure 1 - Output results part 2</p>
 </div> 
 <div align="center">
   <img src="scr/im.png" alt="Output results" width="40%">

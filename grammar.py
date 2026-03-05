@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 class Grammar:
     def __init__(self, non_terminals, terminals, productions, start_symbol):
         self.non_terminals = non_terminals
@@ -9,20 +12,16 @@ class Grammar:
         """
         Classifies grammar according to Chomsky hierarchy.
         """
-
         is_regular = True
         is_context_free = True
 
         for left, rights in self.productions.items():
-
-            # Context-Free condition:
-            # left side must be single non-terminal
-            if len(left) != 2 and left not in self.non_terminals:
+            # Context-Free condition: left side must be single non-terminal
+            if len(left) != 1 or left not in self.non_terminals:
                 is_context_free = False
                 is_regular = False
 
             for right in rights:
-
                 if right == "ε":
                     continue
 
@@ -30,11 +29,9 @@ class Grammar:
                 if len(right) == 2:
                     if not (right[0] in self.terminals and right[1:] in self.non_terminals):
                         is_regular = False
-
                 elif len(right) == 1:
                     if right not in self.terminals:
                         is_regular = False
-
                 else:
                     is_regular = False
 

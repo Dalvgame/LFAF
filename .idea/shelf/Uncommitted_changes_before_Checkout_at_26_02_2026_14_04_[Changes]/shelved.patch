@@ -1,0 +1,13 @@
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from grammar import Grammar\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    VN = {\"S\", \"B\", \"L\"}\r\n    VT = {\"a\", \"b\", \"c\"}\r\n\r\n    P = {\r\n        \"S\": [\"aB\"],\r\n        \"B\": [\"bB\", \"cL\"],\r\n        \"L\": [\"cL\", \"aS\", \"b\"]\r\n    }\r\n\r\n    grammar = Grammar(VN, VT, P, \"S\")\r\n\r\n    print(\"Generated strings:\")\r\n    for _ in range(5):\r\n        print(grammar.generate_string())\r\n\r\n    fa = grammar.to_finite_automaton()\r\n\r\n    print(\"\\nMembership tests:\")\r\n    test_strings = [\"abcb\", \"abcccb\", \"acb\", \"abbbbbcaaab\", \"abbbbbcb\"]\r\n    for s in test_strings:\r\n        print(s, \"->\", fa.string_belongs_to_language(s))\r\n
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	(revision bc5519f0061d47c6d743cafe35e20f41b7fa1e1d)
++++ b/main.py	(date 1770897477912)
+@@ -1,3 +1,4 @@
++#V10
+ from grammar import Grammar
+ 
+ 

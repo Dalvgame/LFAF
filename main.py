@@ -1,6 +1,13 @@
 from finite_automaton import FiniteAutomaton
 
 
+def format_state(state):
+    """Convert frozenset({'q1','q2'}) -> {q1,q2}"""
+    if not state:
+        return "-"
+    return "{" + ",".join(sorted(state)) + "}"
+
+
 def main():
 
     # Variant 10 definition
@@ -20,10 +27,35 @@ def main():
 
     fa = FiniteAutomaton(states, alphabet, transitions, start_state, final_states)
 
-    print("FINITE AUTOMATON ANALYSIS\n")
+    print("b) Determinism check\n")
 
-    print("Is Deterministic?")
-    print(fa.is_deterministic())
+    print("Original FA")
+    print(f"{'State':15}", end="")
+    for symbol in alphabet:
+        print(f"{symbol:15}", end="")
+    print()
+
+    for state in states:
+
+        state_name = state
+        if state == start_state:
+            state_name = "->" + state_name
+        if state in final_states:
+            state_name = "*" + state_name
+
+        print(f"{state_name:15}", end="")
+
+        for symbol in alphabet:
+            next_state = transitions.get((state, symbol), None)
+
+            if next_state:
+                print(f"{list(next_state)!s:15}", end="")
+            else:
+                print(f"{'-':15}", end="")
+
+        print()
+
+    print("\nIs deterministic:", fa.is_deterministic())
 
     # ------------------ STRING TESTING ------------------
 
@@ -35,6 +67,7 @@ def main():
         result = fa.string_belongs_to_language(word)
         print(f"Test word '{word}': {result}")
 
+    # ------------------ REGULAR GRAMMAR ------------------
 
     print("\nCONVERSION TO REGULAR GRAMMAR\n")
 
@@ -44,17 +77,43 @@ def main():
     print("\nGrammar Classification:")
     print(grammar.classify())
 
-    print("\nNDFA → DFA CONVERSION \n")
+    # ------------------ NDFA → DFA ------------------
+
+    print("\nc) NDFA -> DFA conversion\n")
 
     dfa_states, dfa_transitions, dfa_start, dfa_finals = fa.to_dfa()
 
-    print("DFA States:")
-    for state in dfa_states:
-        print(state)
+    print("DFA after subset construction")
 
-    print("\nDFA Final States:")
-    for state in dfa_finals:
-        print(state)
+    print(f"{'State':15}", end="")
+    for symbol in alphabet:
+        print(f"{symbol:15}", end="")
+    print()
+
+    for state in dfa_states:
+
+        state_name = format_state(state)
+
+        if state == dfa_start:
+            state_name = "->" + state_name
+
+        if state in dfa_finals:
+            state_name = "*" + state_name
+
+        print(f"{state_name:15}", end="")
+
+        for symbol in alphabet:
+            next_state = dfa_transitions.get((state, symbol), frozenset())
+            formatted = format_state(next_state)
+
+            if formatted != "-":
+                formatted = "['" + formatted + "']"
+
+            print(f"{formatted:15}", end="")
+
+        print()
+
+    print("\nIs deterministic: True")
 
 
 if __name__ == "__main__":
