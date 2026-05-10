@@ -1,0 +1,57 @@
+Index: cnf_converter.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from collections import defaultdict, deque\r\nfrom copy import deepcopy\r\nfrom grammar import Grammar\r\n\r\n\r\nclass CNFConverter:\r\n    def __init__(self):\r\n        self.counter = 0\r\n\r\n    def to_cnf(self, g):\r\n        print(\"ORIGINAL GRAMMAR\\n\", g, \"\\n\")\r\n\r\n        g1 = self.remove_epsilon(g)\r\n        print(\"STEP 1: Eliminate ε-productions\\n\", g1, \"\\n\")\r\n\r\n        g2 = self.remove_unit(g1)\r\n        print(\"STEP 2: Eliminate renaming rules\\n\", g2, \"\\n\")\r\n\r\n        g3 = self.remove_inaccessible(g2)\r\n        print(\"STEP 3: Eliminate inaccessible symbols\\n\", g3, \"\\n\")\r\n\r\n        g4 = self.remove_non_productive(g3)\r\n        print(\"STEP 4: Eliminate non-productive symbols\\n\", g4, \"\\n\")\r\n\r\n        g5 = self.to_proper_cnf(g4)\r\n        print(\"STEP 5: Chomsky Normal Form\\n\", g5, \"\\n\")\r\n\r\n        return g5\r\n\r\n    # -----------------------------\r\n    # STEP 1: ε-productions\r\n    # -----------------------------\r\n    def remove_epsilon(self, g):\r\n        nullable = set()\r\n\r\n        changed = True\r\n        while changed:\r\n            changed = False\r\n            for A, rules in g.P.items():\r\n                for rhs in rules:\r\n                    if not rhs or all(x in nullable for x in rhs):\r\n                        if A not in nullable:\r\n                            nullable.add(A)\r\n                            changed = True\r\n\r\n        newP = defaultdict(set)\r\n\r\n        for A, rules in g.P.items():\r\n            for rhs in rules:\r\n                variants = self.expand_nullable(rhs, nullable)\r\n                for v in variants:\r\n                    if v:\r\n                        newP[A].add(tuple(v))\r\n\r\n        if g.S in nullable:\r\n            newP[g.S].add(tuple())\r\n\r\n        return Grammar(g.VN, g.VT, {k: list(v) for k, v in newP.items()}, g.S)\r\n\r\n    def expand_nullable(self, rhs, nullable):\r\n        result = set()\r\n        n = len(rhs)\r\n\r\n        for mask in range(1 << n):\r\n            new = []\r\n            valid = True\r\n            for i in range(n):\r\n                if mask & (1 << i):\r\n                    if rhs[i] not in nullable:\r\n                        valid = False\r\n                        break\r\n                else:\r\n                    new.append(rhs[i])\r\n            if valid:\r\n                result.add(tuple(new))\r\n\r\n        return result\r\n\r\n    # -----------------------------\r\n    # STEP 2: unit rules\r\n    # -----------------------------\r\n    def remove_unit(self, g):\r\n        newP = defaultdict(set)\r\n\r\n        for A in g.VN:\r\n            closure = self.unit_closure(A, g)\r\n            for B in closure:\r\n                for rhs in g.P.get(B, []):\r\n                    if not (len(rhs) == 1 and rhs[0] in g.VN):\r\n                        newP[A].add(tuple(rhs))\r\n\r\n        return Grammar(g.VN, g.VT, {k: list(v) for k, v in newP.items()}, g.S)\r\n\r\n    def unit_closure(self, A, g):\r\n        visited = set()\r\n        queue = deque([A])\r\n\r\n        while queue:\r\n            x = queue.popleft()\r\n            if x in visited:\r\n                continue\r\n            visited.add(x)\r\n\r\n            for rhs in g.P.get(x, []):\r\n                if len(rhs) == 1 and rhs[0] in g.VN:\r\n                    queue.append(rhs[0])\r\n\r\n        return visited\r\n\r\n    # -----------------------------\r\n    # STEP 3: inaccessible\r\n    # -----------------------------\r\n    def remove_inaccessible(self, g):\r\n        reachable = set()\r\n        queue = deque([g.S])\r\n\r\n        while queue:\r\n            A = queue.popleft()\r\n            if A in reachable:\r\n                continue\r\n            reachable.add(A)\r\n\r\n            for rhs in g.P.get(A, []):\r\n                for x in rhs:\r\n                    if x in g.VN:\r\n                        queue.append(x)\r\n\r\n        newP = {A: g.P[A] for A in reachable if A in g.P}\r\n        return Grammar(reachable, g.VT, newP, g.S)\r\n\r\n    # -----------------------------\r\n    # STEP 4: non-productive\r\n    # -----------------------------\r\n    def remove_non_productive(self, g):\r\n        productive = set(g.VT)\r\n\r\n        changed = True\r\n        while changed:\r\n            changed = False\r\n            for A, rules in g.P.items():\r\n                for rhs in rules:\r\n                    if all(x in productive for x in rhs):\r\n                        if A not in productive:\r\n                            productive.add(A)\r\n                            changed = True\r\n\r\n        newVN = {x for x in g.VN if x in productive}\r\n        newP = {}\r\n\r\n        for A in newVN:\r\n            valid = []\r\n            for rhs in g.P.get(A, []):\r\n                if all(x in productive for x in rhs):\r\n                    valid.append(rhs)\r\n            if valid:\r\n                newP[A] = valid\r\n\r\n        return Grammar(newVN, g.VT, newP, g.S)\r\n\r\n    # -----------------------------\r\n    # STEP 5: CNF\r\n    # -----------------------------\r\n    def to_proper_cnf(self, g):\r\n        VN = set(g.VN)\r\n        VT = set(g.VT)\r\n        P = deepcopy(g.P)\r\n\r\n        term_map = {}\r\n\r\n        for A in list(P.keys()):\r\n            new_rules = []\r\n            for rhs in P[A]:\r\n                if len(rhs) <= 1:\r\n                    new_rules.append(rhs)\r\n                    continue\r\n\r\n                new_rhs = []\r\n                for x in rhs:\r\n                    if x in VT:\r\n                        if x not in term_map:\r\n                            new_nt = f\"T_{x.upper()}{self.counter}\"\r\n                            self.counter += 1\r\n                            VN.add(new_nt)\r\n                            term_map[x] = new_nt\r\n                        new_rhs.append(term_map[x])\r\n                    else:\r\n                        new_rhs.append(x)\r\n\r\n                new_rules.append(new_rhs)\r\n\r\n            P[A] = new_rules\r\n\r\n        for t, nt in term_map.items():\r\n            P[nt] = [[t]]\r\n\r\n        newP = defaultdict(list)\r\n\r\n        for A, rules in P.items():\r\n            for rhs in rules:\r\n                while len(rhs) > 2:\r\n                    new_nt = f\"X{self.counter}\"\r\n                    self.counter += 1\r\n                    VN.add(new_nt)\r\n\r\n                    newP[A].append([rhs[0], new_nt])\r\n                    rhs = rhs[1:]\r\n                    A = new_nt\r\n\r\n                newP[A].append(rhs)\r\n\r\n        return Grammar(VN, VT, dict(newP), g.S)
+===================================================================
+diff --git a/cnf_converter.py b/cnf_converter.py
+--- a/cnf_converter.py	(revision 9773311b41452fec83fdb8bd8db77d1531ad6083)
++++ b/cnf_converter.py	(date 1777546199150)
+@@ -195,17 +195,17 @@
+ 
+         newP = defaultdict(list)
+ 
+-        for A, rules in P.items():
++        for orig_A, rules in P.items():
+             for rhs in rules:
++                A = orig_A       # reset A for every rule
++                rhs = list(rhs)  # work on a copy
+                 while len(rhs) > 2:
+                     new_nt = f"X{self.counter}"
+                     self.counter += 1
+                     VN.add(new_nt)
+-
+                     newP[A].append([rhs[0], new_nt])
+                     rhs = rhs[1:]
+                     A = new_nt
+-
+                 newP[A].append(rhs)
+ 
+         return Grammar(VN, VT, dict(newP), g.S)
+\ No newline at end of file
+Index: grammar.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Grammar:\r\n    def __init__(self, non_terminals, terminals, productions, start_symbol):\r\n        self.VN = set(non_terminals)\r\n        self.VT = set(terminals)\r\n        self.P = {k: [list(rhs) for rhs in v] for k, v in productions.items()}\r\n        self.S = start_symbol\r\n\r\n    def get_non_terminals(self):\r\n        return self.VN\r\n\r\n    def get_terminals(self):\r\n        return self.VT\r\n\r\n    def get_productions(self):\r\n        return self.P\r\n\r\n    def get_start_symbol(self):\r\n        return self.S\r\n\r\n    def __str__(self):\r\n        result = []\r\n        result.append(f\"V_N = {self.VN}\")\r\n        result.append(f\"V_T = {self.VT}\")\r\n        result.append(f\"S   = {self.S}\")\r\n        result.append(\"P:\")\r\n\r\n        for lhs, rules in self.P.items():\r\n            for rhs in rules:\r\n                if not rhs:\r\n                    result.append(f\"  {lhs} -> ε\")\r\n                else:\r\n                    result.append(f\"  {lhs} -> {' '.join(rhs)}\")\r\n\r\n        return \"\\n\".join(result)
+===================================================================
+diff --git a/grammar.py b/grammar.py
+--- a/grammar.py	(revision 9773311b41452fec83fdb8bd8db77d1531ad6083)
++++ b/grammar.py	(date 1777546189494)
+@@ -2,8 +2,17 @@
+     def __init__(self, non_terminals, terminals, productions, start_symbol):
+         self.VN = set(non_terminals)
+         self.VT = set(terminals)
+-        self.P = {k: [list(rhs) for rhs in v] for k, v in productions.items()}
+         self.S = start_symbol
++        self.P = {}
++        for k, v in productions.items():
++            seen = set()
++            deduped = []
++            for rhs in v:
++                t = tuple(rhs)
++                if t not in seen:
++                    seen.add(t)
++                    deduped.append(list(rhs))
++            self.P[k] = deduped
+ 
+     def get_non_terminals(self):
+         return self.VN

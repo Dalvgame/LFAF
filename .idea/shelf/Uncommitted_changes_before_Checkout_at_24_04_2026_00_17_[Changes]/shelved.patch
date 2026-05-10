@@ -1,0 +1,14 @@
+Index: input.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>μ?NN(O|P){3}Q*R*\r\n(X|Y|Z){3}8+(9|0)\r\n(H|I)(J|K)L*N?
+===================================================================
+diff --git a/input.txt b/input.txt
+--- a/input.txt	(revision 6f7d182273d38a6eec6cda6f0a19fbaf26e5cabe)
++++ b/input.txt	(date 1775729167084)
+@@ -1,3 +1,3 @@
+-μ?NN(O|P){3}Q*R*
++M?NN(O|P){3}Q*R+
+ (X|Y|Z){3}8+(9|0)
+ (H|I)(J|K)L*N?
+\ No newline at end of file
