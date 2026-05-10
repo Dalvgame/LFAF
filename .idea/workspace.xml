@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e41208f-b25b-4742-865f-5e3c0eb736e0" name="Changes" comment="Report for laboratory 5.">
-      <change beforePath="$PROJECT_DIR$/cnf_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnf_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar.py" afterDir="false" />
+    <list default="true" id="0e41208f-b25b-4742-865f-5e3c0eb736e0" name="Changes" comment="Small changes and fixes.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="lab4" />
+        <entry key="$PROJECT_DIR$" value="lab5" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +56,7 @@
     "Python.generator.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "#5 on lab5",
+    "git-widget-placeholder": "lab-6(Parser-&&-Building-an-Abstract-Syntax-Tree)",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,6 +69,36 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\pycharmfold6\LFAF\pic" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="LFAF" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -97,6 +128,7 @@
       <workItem from="1776979005275" duration="69000" />
       <workItem from="1776979079923" duration="1261000" />
       <workItem from="1777540383728" duration="3482000" />
+      <workItem from="1778426540918" duration="2666000" />
     </task>
     <task id="LOCAL-00001" summary="-Lexer implementation">
       <option name="closed" value="true" />
@@ -202,7 +234,71 @@
       <option name="project" value="LOCAL" />
       <updated>1776980328838</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Initial project setup.">
+      <option name="closed" value="true" />
+      <created>1778426777579</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1778426777579</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add TokenType enum with basic token categories">
+      <option name="closed" value="true" />
+      <created>1778426981138</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1778426981138</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add Token class and __repr__ to Token for easier debugging">
+      <option name="closed" value="true" />
+      <created>1778427198388</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1778427198388</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add Lexer class,implement tokenise method using regex.">
+      <option name="closed" value="true" />
+      <created>1778427373769</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1778427373769</updated>
+    </task>
+    <task id="LOCAL-00018" summary="add ASTNode,add Program,FunctionDef,FunctionCall, NumberLiteral, Identifier,Assignment and BinaryOp nodes.">
+      <option name="closed" value="true" />
+      <created>1778427611072</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1778427611072</updated>
+    </task>
+    <task id="LOCAL-00019" summary="implement recursive descent parser with lookahead and operator precedence">
+      <option name="closed" value="true" />
+      <created>1778428173944</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1778428173944</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add main, print tokens and AST.">
+      <option name="closed" value="true" />
+      <created>1778428287667</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1778428287667</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Small changes and fixes.">
+      <option name="closed" value="true" />
+      <created>1778429121716</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1778429121716</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,11 +341,19 @@
     <MESSAGE value="add README for lab 4 regular expressions" />
     <MESSAGE value="Program for laboratory 5." />
     <MESSAGE value="Report for laboratory 5." />
-    <option name="LAST_COMMIT_MESSAGE" value="Report for laboratory 5." />
+    <MESSAGE value="Initial project setup." />
+    <MESSAGE value="add TokenType enum with basic token categories" />
+    <MESSAGE value="add Token class and __repr__ to Token for easier debugging" />
+    <MESSAGE value="Add Lexer class,implement tokenise method using regex." />
+    <MESSAGE value="add ASTNode,add Program,FunctionDef,FunctionCall, NumberLiteral, Identifier,Assignment and BinaryOp nodes." />
+    <MESSAGE value="implement recursive descent parser with lookahead and operator precedence" />
+    <MESSAGE value="Add main, print tokens and AST." />
+    <MESSAGE value="Small changes and fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Small changes and fixes." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/LFAF$Main.coverage" NAME="Main Coverage Results" MODIFIED="1776979827343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/LFAF$main.coverage" NAME="main Coverage Results" MODIFIED="1777546377066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LFAF$Main.coverage" NAME="Main Coverage Results" MODIFIED="1778428585525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LFAF$main.coverage" NAME="main Coverage Results" MODIFIED="1778429207339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LFAF$cnf_converter.coverage" NAME="cnf_converter Coverage Results" MODIFIED="1777546199164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LFAF$generator.coverage" NAME="generator Coverage Results" MODIFIED="1774561799309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

@@ -8,7 +8,6 @@ x + y * 2
 sin(3.14)
 cos(0)
 result = 10.5 - 1.1 / 2
-# this is a comment
 """
 
 
