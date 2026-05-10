@@ -1,3 +1,5 @@
+
+
 from token_type import TokenType
 from token_model import Token
 from ast_nodes import (
@@ -7,14 +9,13 @@ from ast_nodes import (
 
 
 class ParseError(Exception):
-
+    """Raised when the parser encounters unexpected input."""
 
 
 class Parser:
     def __init__(self, tokens: list[Token]) -> None:
         self._tokens = tokens
         self._pos    = 0
-
 
     def _peek(self) -> Token:
         return self._tokens[self._pos]
@@ -43,8 +44,6 @@ class Parser:
 
     def _at_end(self) -> bool:
         return self._check(TokenType.EOF)
-
-    # Entry point
 
     def parse(self) -> Program:
         statements: list[ASTNode] = []
@@ -81,6 +80,7 @@ class Parser:
         self._expect(TokenType.RPAREN)
         return FunctionDef(name, params)
 
+
     def _parse_assignment(self) -> Assignment:
         var_name = self._expect(TokenType.IDENTIFIER).value
         self._expect(TokenType.ASSIGN)
@@ -98,6 +98,7 @@ class Parser:
 
         return left
 
+
     def _parse_term(self) -> ASTNode:
         left = self._parse_factor()
 
@@ -107,6 +108,7 @@ class Parser:
             left  = BinaryOp(op, left, right)
 
         return left
+
 
     def _parse_factor(self) -> ASTNode:
         t = self._peek()
@@ -135,6 +137,7 @@ class Parser:
         raise ParseError(
             f"Unexpected token in expression: {t.type.name} ({t.value!r})"
         )
+
 
     def _parse_function_call(self) -> FunctionCall:
         name = self._consume().value                         # function name
