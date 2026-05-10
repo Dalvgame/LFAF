@@ -1,0 +1,30 @@
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from lexer import Lexer\r\n\r\nwith open(\"examples.txt\") as f:\r\n    lines = f.readlines()\r\n\r\nfor i, line in enumerate(lines, start=1):\r\n\r\n    text = line.strip()\r\n\r\n    if not text:\r\n        continue\r\n\r\n    print(f\"\\nExpression {i}: {text}\")\r\n\r\n    lexer = Lexer(text)\r\n    tokens = lexer.tokenize()\r\n\r\n    for token in tokens:\r\n        print(token)
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	(revision 630ce84d07cf3d8bfbacb3edc663d923b075297c)
++++ b/main.py	(date 1773773692544)
+@@ -16,4 +16,4 @@
+     tokens = lexer.tokenize()
+ 
+     for token in tokens:
+-        print(token)
+\ No newline at end of file
++        print(token)
+Index: examples.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>sin(45) + cos(30)\r\ntan(90) * 2\r\nx + 3.14 * y\r\nsin(76) + tan(12) *3
+===================================================================
+diff --git a/examples.txt b/examples.txt
+--- a/examples.txt	(revision 630ce84d07cf3d8bfbacb3edc663d923b075297c)
++++ b/examples.txt	(date 1773920522423)
+@@ -1,4 +1,2 @@
+-sin(45) + cos(30)
+-tan(90) * 2
+ x + 3.14 * y
+-sin(76) + tan(12) *3
+\ No newline at end of file
++cos(30) + sin(45)

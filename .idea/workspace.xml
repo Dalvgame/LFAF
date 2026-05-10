@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0e41208f-b25b-4742-865f-5e3c0eb736e0" name="Changes" comment="Small changes and fixes.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="lab5" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Dalvgame&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dalvgame/LFAF.git&quot;,
+    &quot;accountId&quot;: &quot;2b4af670-f83b-4d10-8955-b13e15b68c07&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3B5Goqyq92vwEgbfkddiVwatXcM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Main.executor": "Run",
+    "Python.cnf_converter.executor": "Run",
+    "Python.generator.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "lab-6(Parser-&&-Building-an-Abstract-Syntax-Tree)",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\pycharmfold6\LFAF\pic" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="LFAF" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-PY-242.21829.153" />
+        <option value="bundled-python-sdk-464836ebc622-b74155a9e76b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.21829.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0e41208f-b25b-4742-865f-5e3c0eb736e0" name="Changes" comment="Improved version with better looking output and visuualization." />
+      <created>1773771697908</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773771697908</updated>
+      <workItem from="1773771699341" duration="2810000" />
+      <workItem from="1773784027328" duration="9000" />
+      <workItem from="1773919596345" duration="628000" />
+      <workItem from="1773920340532" duration="181000" />
+      <workItem from="1774560561806" duration="2467000" />
+      <workItem from="1774563065350" duration="158000" />
+      <workItem from="1775385973935" duration="13000" />
+      <workItem from="1775726640308" duration="4000000" />
+      <workItem from="1776802967029" duration="35000" />
+      <workItem from="1776979005275" duration="69000" />
+      <workItem from="1776979079923" duration="1261000" />
+      <workItem from="1777540383728" duration="3482000" />
+      <workItem from="1778426540918" duration="2666000" />
+    </task>
+    <task id="LOCAL-00001" summary="-Lexer implementation">
+      <option name="closed" value="true" />
+      <created>1773773017085</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1773773017085</updated>
+    </task>
+    <task id="LOCAL-00002" summary="-Main plus input method">
+      <option name="closed" value="true" />
+      <created>1773773059976</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1773773059976</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Readme">
+      <option name="closed" value="true" />
+      <created>1773774536135</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1773774536135</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1774560662362</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1774560662362</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add AST node types for regex tree representation">
+      <option name="closed" value="true" />
+      <created>1774562704466</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774562704466</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add AST node types for regex tree representation">
+      <option name="closed" value="true" />
+      <created>1774563128373</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1774563128373</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add recursive descent parser for regex expressions">
+      <option name="closed" value="true" />
+      <created>1774563145115</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1774563145115</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add string generator and public regex generator interface">
+      <option name="closed" value="true" />
+      <created>1774563165206</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1774563165206</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add processing logger for step-by-step generation trace">
+      <option name="closed" value="true" />
+      <created>1774563194542</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1774563194542</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add main entry point with file I/O and sample input">
+      <option name="closed" value="true" />
+      <created>1774563211166</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1774563211166</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add README for lab 4 regular expressions">
+      <option name="closed" value="true" />
+      <created>1774563222278</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1774563222278</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Program for laboratory 5.">
+      <option name="closed" value="true" />
+      <created>1776980308223</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1776980308223</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Report for laboratory 5.">
+      <option name="closed" value="true" />
+      <created>1776980328838</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1776980328838</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Initial project setup.">
+      <option name="closed" value="true" />
+      <created>1778426777579</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1778426777579</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add TokenType enum with basic token categories">
+      <option name="closed" value="true" />
+      <created>1778426981138</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1778426981138</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add Token class and __repr__ to Token for easier debugging">
+      <option name="closed" value="true" />
+      <created>1778427198388</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1778427198388</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add Lexer class,implement tokenise method using regex.">
+      <option name="closed" value="true" />
+      <created>1778427373769</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1778427373769</updated>
+    </task>
+    <task id="LOCAL-00018" summary="add ASTNode,add Program,FunctionDef,FunctionCall, NumberLiteral, Identifier,Assignment and BinaryOp nodes.">
+      <option name="closed" value="true" />
+      <created>1778427611072</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1778427611072</updated>
+    </task>
+    <task id="LOCAL-00019" summary="implement recursive descent parser with lookahead and operator precedence">
+      <option name="closed" value="true" />
+      <created>1778428173944</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1778428173944</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add main, print tokens and AST.">
+      <option name="closed" value="true" />
+      <created>1778428287667</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1778428287667</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Small changes and fixes.">
+      <option name="closed" value="true" />
+      <created>1778429121716</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1778429121716</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/lab4" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Improved version with better looking output and visuualization." />
+    <MESSAGE value="-Lexer implementation" />
+    <MESSAGE value="-Main plus input method" />
+    <MESSAGE value="Readme" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="add AST node types for regex tree representation" />
+    <MESSAGE value="add recursive descent parser for regex expressions" />
+    <MESSAGE value="add string generator and public regex generator interface" />
+    <MESSAGE value="add processing logger for step-by-step generation trace" />
+    <MESSAGE value="add main entry point with file I/O and sample input" />
+    <MESSAGE value="add README for lab 4 regular expressions" />
+    <MESSAGE value="Program for laboratory 5." />
+    <MESSAGE value="Report for laboratory 5." />
+    <MESSAGE value="Initial project setup." />
+    <MESSAGE value="add TokenType enum with basic token categories" />
+    <MESSAGE value="add Token class and __repr__ to Token for easier debugging" />
+    <MESSAGE value="Add Lexer class,implement tokenise method using regex." />
+    <MESSAGE value="add ASTNode,add Program,FunctionDef,FunctionCall, NumberLiteral, Identifier,Assignment and BinaryOp nodes." />
+    <MESSAGE value="implement recursive descent parser with lookahead and operator precedence" />
+    <MESSAGE value="Add main, print tokens and AST." />
+    <MESSAGE value="Small changes and fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Small changes and fixes." />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LFAF$Main.coverage" NAME="Main Coverage Results" MODIFIED="1778428585525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LFAF$main.coverage" NAME="main Coverage Results" MODIFIED="1778429207339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LFAF$cnf_converter.coverage" NAME="cnf_converter Coverage Results" MODIFIED="1777546199164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LFAF$generator.coverage" NAME="generator Coverage Results" MODIFIED="1774561799309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
